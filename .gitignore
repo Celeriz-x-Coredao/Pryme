@@ -1,0 +1,143 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+.bower_components/
+vendor/
+
+# Environment variables
+.env
+.env.*
+
+# Build output
+dist/
+build/
+out/
+*.out
+*.exe
+*.dll
+*.dylib
+*.so
+
+# Temporary files and backups
+*.tmp
+*.temp
+*.bak
+*.old
+*.swp
+*.seed
+*.pid
+*.lock
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE and editor settings
+.idea/
+.vscode/
+*.code-workspace
+*.sublime-workspace
+*.sublime-project
+
+# Testing output
+coverage/
+.nyc_output/
+.jest/
+.junit/
+
+# System files
+*.iml
+*.class
+*.suo
+*.ncb
+*.user
+*.mode1v3
+*.mode2v3
+*.tags
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Java
+*.class
+target/
+*.jar
+*.war
+*.ear
+
+# Ruby/Rails
+*.gem
+.bundle/
+log/
+tmp/
+db/*.sqlite3
+db/*.sqlite3-journal
+public/system/
+public/uploads/
+
+# Go
+*.exe~
+*.test
+go.sum
+
+# PHP/Composer
+vendor/
+composer.phar
+
+# Laravel
+/public/storage
+/storage/*.key
+.env
+.env.*
+.env.*.local
+
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.packages
+.idea/
+android/.gradle/
+build/
+*.iml
+pubspec.lock
+
+# C/C++
+*.obj
+*.o
+*.a
+*.lib
+*.so
+*.dll
+*.exe
+
+# JavaScript/TypeScript
+*.tsbuildinfo
+*.js.map
+*.d.ts
+
+# Next.js
+.next/
+.vercel/
+
+# React Native
+.expo/
+*.expo/
+web-build/
+
+# SvelteKit
+.svelte-kit/
+build/
+
+# Monorepo
+pnpm-lock.yaml
+lerna-debug.log
