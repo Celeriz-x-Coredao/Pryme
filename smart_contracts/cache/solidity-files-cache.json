@@ -1,0 +1,186 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/Users/debasishbehera/Desktop/coredao/zk-credit-final/Pryme/smart_contracts/contracts/ CreditScoring.sol": {
+      "lastModificationDate": 1737963693773,
+      "contentHash": "db11231984e3d1cd1380752f7646c9d4",
+      "sourceName": "contracts/ CreditScoring.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "CreditScoring",
+        "IVerifier"
+      ]
+    },
+    "/Users/debasishbehera/Desktop/coredao/zk-credit-final/Pryme/smart_contracts/contracts/DebtToIncomeVerifier.sol": {
+      "lastModificationDate": 1737963679029,
+      "contentHash": "95fad769027a70d5754058c5184f81b8",
+      "sourceName": "contracts/DebtToIncomeVerifier.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "DebtToIncomeVerifier"
+      ]
+    },
+    "/Users/debasishbehera/Desktop/coredao/zk-credit-final/Pryme/smart_contracts/contracts/TransactionHistoryVerifier.sol": {
+      "lastModificationDate": 1737963682060,
+      "contentHash": "be7350eb35c4975ee1cef7120f88981f",
+      "sourceName": "contracts/TransactionHistoryVerifier.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "TransactionHistoryVerifier"
+      ]
+    },
+    "/Users/debasishbehera/Desktop/coredao/zk-credit-final/Pryme/smart_contracts/contracts/WalletAgeVerifier.sol": {
+      "lastModificationDate": 1737963685016,
+      "contentHash": "541ad14f49e6c138dc1debc946512b64",
+      "sourceName": "contracts/WalletAgeVerifier.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "WalletAgeVerifier"
+      ]
+    },
+    "/Users/debasishbehera/Desktop/coredao/zk-credit-final/Pryme/smart_contracts/contracts/WalletBalanceVerifier.sol": {
+      "lastModificationDate": 1737963688198,
+      "contentHash": "e6e122eccc0771e37b5670446a021fc8",
+      "sourceName": "contracts/WalletBalanceVerifier.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "WalletBalanceVerifier"
+      ]
+    }
+  }
+}
