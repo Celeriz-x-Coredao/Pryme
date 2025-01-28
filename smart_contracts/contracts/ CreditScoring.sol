@@ -14,7 +14,7 @@ contract CreditScoring {
     IVerifier public debtToIncomeVerifier;
     IVerifier public transactionHistoryVerifier;
     IVerifier public walletAgeVerifier;
-
+    IVerifier public walletBalanceVerifier;
 
     event CreditScoreCalculated(address indexed user, uint256 creditScore);
 
@@ -22,12 +22,12 @@ contract CreditScoring {
         address _debtToIncomeVerifier,
         address _transactionHistoryVerifier,
         address _walletAgeVerifier,
-
+        address _walletBalanceVerifier
     ) {
         debtToIncomeVerifier = IVerifier(_debtToIncomeVerifier);
         transactionHistoryVerifier = IVerifier(_transactionHistoryVerifier);
         walletAgeVerifier = IVerifier(_walletAgeVerifier);
- 
+        walletBalanceVerifier = IVerifier(_walletBalanceVerifier);
     }
 
     function verifyAndCalculateCreditScore(
@@ -49,7 +49,11 @@ contract CreditScoring {
         uint256[2] memory cWalletAge,
         uint256[1] memory publicSignalsWalletAge, // Adjusted type
 
-     
+        // Wallet Balance proof
+        uint256[2] memory aWalletBalance,
+        uint256[2][2] memory bWalletBalance,
+        uint256[2] memory cWalletBalance,
+        uint256[1] memory publicSignalsWalletBalance // Adjusted type
     ) public {
         // Verify Debt-to-Income proof
         require(
@@ -84,14 +88,23 @@ contract CreditScoring {
             "Wallet Age verification failed"
         );
 
-        
+        // Verify Wallet Balance proof
+        require(
+            walletBalanceVerifier.verifyProof(
+                aWalletBalance,
+                bWalletBalance,
+                cWalletBalance,
+                publicSignalsWalletBalance
+            ),
+            "Wallet Balance verification failed"
+        );
 
         // Calculate Credit Score
         uint256 creditScore = calculateCreditScore(
             publicSignalsDebtToIncome,
             publicSignalsTransactionHistory,
             publicSignalsWalletAge,
-        
+            publicSignalsWalletBalance
         );
 
         emit CreditScoreCalculated(msg.sender, creditScore);
@@ -109,7 +122,7 @@ contract CreditScoring {
         if (publicSignalsDebtToIncome[0] == 1) score += 25;
         if (publicSignalsTransactionHistory[0] == 1) score += 25;
         if (publicSignalsWalletAge[0] == 1) score += 25;
-    
+        if (publicSignalsWalletBalance[0] == 1) score += 25;
 
         return score;
     }
