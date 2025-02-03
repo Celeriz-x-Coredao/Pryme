@@ -1,50 +1,33 @@
-import { ethers } from "hardhat";
-import dotenv from "dotenv";
-import { CreditScoring__factory } from "../typechain-types";
+const hre = require("hardhat");
+require("dotenv").config();
 
-dotenv.config();
+async function main() {
+  const CreditScoring = await hre.ethers.getContractFactory("CreditScoring");
+  
+  // Verifier contract addresses
+  const debtToIncomeVerifier = process.env.DEBTTOINCOMEVERIFIER;
+  const transactionHistoryVerifier = process.env.TRANSACTIONHISTORYVERIFIER;
+  const walletAgeVerifier = process.env.WALLETAGEVERIFIER;
+  const walletBalanceVerifier = process.env.WALLETBALANCEVERIFIER;
 
-async function deployContract() {
-  try {
-    // Get contract factory using newer syntax
-    const creditScoringFactory = await ethers.getContractFactory("CreditScoring");
+  const creditScoring = await CreditScoring.deploy(
+    debtToIncomeVerifier,
+    transactionHistoryVerifier,
+    walletAgeVerifier,
+    walletBalanceVerifier
+  );
 
-    // Get verifier addresses from environment variables
-    const verifierAddresses = {
-      debtToIncome: process.env.DEBTTOINCOMEVERIFIER,
-      transactionHistory: process.env.TRANSACTIONHISTORYVERIFIER,
-      walletAge: process.env.WALLETAGEVERIFIER,
-      walletBalance: process.env.WALLETBALANCEVERIFIER
-    };
-
-    // Deploy contract with verifier addresses
-    const creditScoring = await creditScoringFactory.deploy(
-      verifierAddresses.debtToIncome,
-      verifierAddresses.transactionHistory,
-      verifierAddresses.walletAge,
-      verifierAddresses.walletBalance
-    );
-
-    // Wait for deployment
-    const deployedContract = await creditScoring.waitForDeployment();
-    
-    // Get deployed address
-    const contractAddress = await deployedContract.getAddress();
-    
-    console.log(`CreditScoring deployed successfully to: ${contractAddress}`);
-    return contractAddress;
-  } catch (error) {
-    console.error("Deployment failed:", error);
-    throw error;
-  }
+  // Wait for deployment to complete
+  await creditScoring.waitForDeployment();
+  
+  // Get the deployed contract address using getAddress()
+  const deployedAddress = await creditScoring.getAddress();
+  console.log("CreditScoring deployed to:", deployedAddress);
 }
 
-// Self-executing async function
-(async () => {
-  try {
-    await deployContract();
-    process.exit(0);
-  } catch (error) {
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
     process.exit(1);
-  }
-})();
+  });
