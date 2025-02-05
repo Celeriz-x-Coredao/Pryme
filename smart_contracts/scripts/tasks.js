@@ -28,5 +28,8 @@ task("show-gas", "Shows gas usage for deployments")
       "CreditScoring"
     ];
 
-   
+    for (const contract of contracts) {
+      const cost = await utils.estimateDeploymentCost(contract);
+      console.log(`${contract} deployment cost: ${ethers.formatEther(cost)} ETH`);
+    }
   });
