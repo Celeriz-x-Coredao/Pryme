@@ -1,40 +1,45 @@
 const hre = require("hardhat");
 
-async function main() {
+async function deployVerifiers() {
   const { ethers } = hre;
-
-  // Deploy DebtToIncomeVerifier
   const [deployer] = await ethers.getSigners();
   console.log("Deploying contracts with the account:", deployer.address);
+
+  // Get contract factories
+  const verifierFactories = {
+    debtToIncome: await ethers.getContractFactory("DebtToIncomeVerifier"),
+    transactionHistory: await ethers.getContractFactory("TransactionHistoryVerifier"),
+    walletAge: await ethers.getContractFactory("WalletAgeVerifier"),
+    walletBalance: await ethers.getContractFactory("WalletBalanceVerifier")
+  };
+
+  // Deploy contracts and store instances
+  const deployedVerifiers = {
+    debtToIncome: await verifierFactories.debtToIncome.deploy(),
+    transactionHistory: await verifierFactories.transactionHistory.deploy(),
+    walletAge: await verifierFactories.walletAge.deploy(),
+    walletBalance: await verifierFactories.walletBalance.deploy()
+  };
+
+  // Wait for all deployments to complete and get addresses
+  const verifierAddresses = {};
   
-  const DebtToIncomeVerifier = await ethers.getContractFactory("DebtToIncomeVerifier");
-  const debtToIncomeVerifier = await DebtToIncomeVerifier.deploy();
-  await debtToIncomeVerifier.waitForDeployment();
-  // console.log("DebtToIncomeVerifier deployed to:", await debtToIncomeVerifier.getAddress());
+  for (const [key, verifier] of Object.entries(deployedVerifiers)) {
+    await verifier.waitForDeployment();
+    verifierAddresses[key] = await verifier.getAddress();
+    console.log(`${key}Verifier deployed to:`, verifierAddresses[key]);
+  }
 
-  // Deploy TransactionHistoryVerifier
-  const TransactionHistoryVerifier = await ethers.getContractFactory("TransactionHistoryVerifier");
-  const transactionHistoryVerifier = await TransactionHistoryVerifier.deploy();
-  await transactionHistoryVerifier.waitForDeployment();
-  console.log("TransactionHistoryVerifier deployed to:", await transactionHistoryVerifier.getAddress());
+  return verifierAddresses;
+}
 
-  // Deploy WalletAgeVerifier
-  const WalletAgeVerifier = await ethers.getContractFactory("WalletAgeVerifier");
-  const walletAgeVerifier = await WalletAgeVerifier.deploy();
-  await walletAgeVerifier.waitForDeployment();
-  console.log("WalletAgeVerifier deployed to:", await walletAgeVerifier.getAddress());
-
-  // Deploy WalletBalanceVerifier
-  const WalletBalanceVerifier = await ethers.getContractFactory("WalletBalanceVerifier");
-  const walletBalanceVerifier = await WalletBalanceVerifier.deploy();
-  await walletBalanceVerifier.waitForDeployment();
-  console.log("WalletBalanceVerifier deployed to:", await walletBalanceVerifier.getAddress());
-
+async function main() {
+  const deployedAddresses = await deployVerifiers();
   return {
-    debtToIncomeVerifier: await debtToIncomeVerifier.getAddress(),
-    transactionHistoryVerifier: await transactionHistoryVerifier.getAddress(),
-    walletAgeVerifier: await walletAgeVerifier.getAddress(),
-    walletBalanceVerifier: await walletBalanceVerifier.getAddress()
+    debtToIncomeVerifier: deployedAddresses.debtToIncome,
+    transactionHistoryVerifier: deployedAddresses.transactionHistory,
+    walletAgeVerifier: deployedAddresses.walletAge,
+    walletBalanceVerifier: deployedAddresses.walletBalance
   };
 }
 
